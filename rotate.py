@@ -13,15 +13,15 @@ group = sys.argv[1].split(',')
 logging.warning('will look for instances with tag "Group" and values: %s' % group)
 
 state = 'running'
-min_ttl = 30  # minutes
-percent_to_rotate = 25  # max number of rotated instances per iteration
+min_ttl = os.getenv('MIN_TTL', 30)  # minutes
+percent_to_rotate = os.getenv('PERCENT_TO_ROTATE', 25)  # max number of rotated instances per iteration
 
 # graylog_host = 'graylog.yourdomain.com'
 # graylog_port = 12399
 # graylog_facility = 'aws-ec2-rotate'
 
 session = boto3.Session(
-    region_name='us-east-1',
+    region_name=os.environ['AWS_EC2_ROTATE_REGION'],
     aws_access_key_id=os.environ['KEY_ID'],
     aws_secret_access_key=os.environ['KEY_SECRET'],
 )
