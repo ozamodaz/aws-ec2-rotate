@@ -33,7 +33,7 @@ def rotate(instance):
     instance.wait_until_stopped()
     instance.start()
     instance.wait_until_running()
-    print('ok: %s' % instance.id)
+    logging.warning('ok: %s' % instance.id)
 
 
 def instances_by_uptime(instances):
