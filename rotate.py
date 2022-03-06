@@ -10,6 +10,7 @@ import json
 from concurrent.futures import ThreadPoolExecutor
 
 group = sys.argv[1].split(',')
+logging.warning('will look for instances with tag "Group" and values: %s' % group)
 
 state = 'running'
 min_ttl = 30  # minutes
