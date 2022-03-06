@@ -2,7 +2,18 @@
 
 Скрипт позволяет автоматизировать это через Cron. Скрипт получает список работающих инстансов по определенному тегу, по-умолчанию это тег Group, сортирует их по времени работы и те инстансы, которые уже работают дольше, чем `MIN_TTL` минут будут стопнуты и затем обратно запущены.
 
-Для работы скрипта нужно создать пользователя, выбрав AWS credential type: Programmatic access и выдать ему доступ, достаточный чтобы запрашивать список инстансов, а также делать стоп и старт инстансов. `AmazonEC2FullAccess` точно хватит, но если у вас много лишнего времени - можете вручную наклацать более узкие права.
+---
+Для работы скрипта нужно создать пользователя, выбрав AWS credential type: Programmatic access и выдать ему доступ, достаточный чтобы запрашивать список инстансов, а также делать стоп и старт инстансов. 
+
+`AmazonEC2FullAccess` точно хватит, но если у вас много лишнего времени - можете вручную наклацать более узкие права.
+
+https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html
+
+![6](https://user-images.githubusercontent.com/66549992/156938806-df8da283-7291-402c-9137-84b459e458cd.png)
+
+![7](https://user-images.githubusercontent.com/66549992/156938881-171d6267-e9f5-416e-922b-ae4b732fd4ce.png)
+
+---
 
 Environment Variables:
 
@@ -16,6 +27,8 @@ Environment Variables:
 
 `KEY_SECRET` - получите когда создадите пользователя
 
+---
+
 Установка:
 
 1) Устанавливаете `python3`, `python3-pip`
@@ -24,6 +37,6 @@ Environment Variables:
 
 3) Создаете пользователя, как описано ниже, получаете `KEY_ID` и `KEY_SECRET`
 
-4) Запускаете редактирование Cron через `crontab -e`, обязательно прописываете Енвы `AWS_EC2_ROTATE_REGION`, `KEY_ID` и `KEY_SECRET`, опционально прописываете `MIN_TTL` и `PERCENT_TO_ROTATE` если не устраивают значения по-умолчанию, ну и прописываете запуск самого скрипта в формате Крон, для примера, если вы проставили инстансам тег `Group` со значением `rotate_me`:
+4) Запускаете редактирование Cron через `crontab -e`, обязательно прописываете Енвы `AWS_EC2_ROTATE_REGION`, `KEY_ID` и `KEY_SECRET`, опционально прописываете `MIN_TTL` и `PERCENT_TO_ROTATE` если не устраивают значения по-умолчанию, ну и прописываете запуск самого скрипта в формате Крон, для примера, если вы проставили инстансам тег `Group` со значением `rotate_me_group`:
 
-`*/30 * * * * /usr/bin/python3 /home/ozamodaz/aws-ec2-rotate/rotate.py rotate_me >> /tmp/aws-ec2-rotate.log 2>&1`
+`*/30 * * * * /usr/bin/python3 /home/ozamodaz/aws-ec2-rotate/rotate.py rotate_me_group >> /tmp/aws-ec2-rotate.log 2>&1`
