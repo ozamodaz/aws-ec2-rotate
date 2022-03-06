@@ -52,6 +52,8 @@ def main():
             {'Name': 'tag:Group', 'Values': group},
             {'Name': 'instance-state-name', 'Values': [state]}])
     instances = list(instances.all())
+    logging.warning(instances)
+
     by_uptime = instances_by_uptime(instances)
     count = int(len(instances)/100*percent_to_rotate)
     queue = [i for i in by_uptime if i[1] > min_ttl]
