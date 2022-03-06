@@ -26,4 +26,4 @@ KEY_SECRET - получите когда создадите пользовате
 
 4) Запускаете редактирование Cron через `crontab -e`, обязательно прописываете Енвы AWS_EC2_ROTATE_REGION, KEY_ID и KEY_SECRET, опционально прописываете MIN_TTL и PERCENT_TO_ROTATE если не устраивают значения по-умолчанию, ну и прописываете запуск самого скрипта в формате Крон, для примера, если вы проставили инстансам тег Group со значением rotate_me:
 
-*/5 * * * * /usr/bin/python3 /home/ozamodaz/aws-ec2-rotate rotate_me >> /tmp/aws-ec2-rotate.log 2>&1
+*/30 * * * * /usr/bin/python3 /home/ozamodaz/aws-ec2-rotate rotate_me >> /tmp/aws-ec2-rotate.log 2>&1
