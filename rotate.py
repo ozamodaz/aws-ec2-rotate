@@ -15,9 +15,9 @@ state = 'running'
 min_ttl = 30  # minutes
 percent_to_rotate = 25  # max number of rotated instances per iteration
 
-graylog_host = 'syslog.competera.net'
-graylog_port = 12399
-graylog_facility = 'dc-aws-rotate'
+# graylog_host = 'graylog.yourdomain.com'
+# graylog_port = 12399
+# graylog_facility = 'aws-ec2-rotate'
 
 session = boto3.Session(
     region_name='us-east-1',
@@ -96,9 +96,9 @@ def main():
 
 
 if __name__ == '__main__':
-    graylog_handler = graypy.GELFTcpHandler(graylog_host,
-                                            graylog_port,
-                                            facility=graylog_facility)
+    # graylog_handler = graypy.GELFTcpHandler(graylog_host,
+    #                                         graylog_port,
+    #                                         facility=graylog_facility)
     logging.basicConfig(level=logging.WARNING)
-    logging.getLogger().addHandler(graylog_handler)
+    # logging.getLogger().addHandler(graylog_handler)
     main()
